@@ -1,4 +1,4 @@
-package com.corejava.commerce.app;
+package com.corejava.commerce.catalog;
 
 public class Category {
     private Long id;

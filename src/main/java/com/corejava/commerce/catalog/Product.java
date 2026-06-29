@@ -1,6 +1,7 @@
-package com.corejava.commerce.app;
+package com.corejava.commerce.catalog;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Product {
     private Long id;
@@ -37,7 +38,11 @@ public class Product {
         this.category = category;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id);
 
+    }
     public Long getId() {
         return id;
     }

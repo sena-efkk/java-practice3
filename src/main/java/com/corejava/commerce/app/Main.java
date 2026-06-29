@@ -1,9 +1,11 @@
-package src.main.java.com.corejava.commerce.app;
+package com.corejava.commerce.app;
 
-import com.corejava.commerce.app.Category;
-import com.corejava.commerce.app.Product;
+import com.corejava.commerce.catalog.Category;
+import com.corejava.commerce.catalog.Product;
+import com.corejava.commerce.catalog.ProductCatalogService;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 public class Main {
@@ -16,12 +18,25 @@ public class Main {
         Product p2 = new Product(2L, "tarihkitabı", BigDecimal.valueOf(50), 22, kitap);
         Product p3 = new Product(3L, "bilgisayar", BigDecimal.valueOf(700), 33, elektronik);
 
+        ProductCatalogService pcs =new ProductCatalogService();
+        pcs.addProduct(p1);
+        pcs.addProduct(p2);
+        pcs.addProduct(p3);
+        pcs.fndById(2L);
+        pcs.changeProductCategory(3L, kitap);
 
-        p1.decreaseStock(1);
-        p1.increaseStock(1);
+        pcs.changeProductPrice(BigDecimal.valueOf(500),1L);
 
-        p2.changePrice(BigDecimal.valueOf(100));
-        p3.changeCategory(kitap);
+//        p1.decreaseStock(1);
+//        p1.increaseStock(1);
+//
+//        p2.changePrice(BigDecimal.valueOf(100));
+//        p3.changeCategory(kitap);
+
+        pcs.decreaseProductStock(1L, 1);
+        pcs.increaseProductStock(1L, 1);
+        pcs.changeProductPrice(BigDecimal.valueOf(500), 1L);
+
 
         try {
             p1.decreaseStock(100);
@@ -33,7 +48,11 @@ public class Main {
         printProduct(p2);
         printProduct(p3);
 
+        List<Product> kitapUrunleri = pcs.findByCategory(kitap);
 
+        for (Product product : kitapUrunleri) {
+            printProduct(product);
+        }
     }
     private static void printProduct(Product product) {
         System.out.println("--- PRODUCT ---");
